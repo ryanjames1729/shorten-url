@@ -3,6 +3,19 @@ import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
+
+  handleSubmit = e => {
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({ "form-name": "url-input", ...this.state })
+    })
+      .then(() => alert("Success!"))
+      .catch(error => alert(error));
+
+    e.preventDefault();
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -17,7 +30,7 @@ export default function Home() {
         </h1>
 
         <div className={styles.container}>
-          <form name="url-input" data-netlify="true" data-netlify-honeypot="bot-field" method="post">
+          <form name="url-input" data-netlify="true" data-netlify-honeypot="bot-field" method="post" onSubmit={handleSubmit}>
             <label>URL: <input type="text" name="url" placeholder="https://..."></input></label>
             <button type="submit">Shorten that URL!</button>
           </form>
