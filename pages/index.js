@@ -17,7 +17,7 @@ export default function Home() {
         </h1>
 
         <div className={styles.container}>
-          <form name="url-input" netlify>
+          <form name="url-input" data-netlify="true" data-netlify-honeypot="bot-field" method="post">
             <label>URL: <input type="text" name="url" placeholder="https://..."></input></label>
             <button type="submit">Shorten that URL!</button>
           </form>
