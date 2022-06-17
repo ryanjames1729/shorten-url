@@ -16,6 +16,12 @@ export default function Home() {
           Welcome to URL shortener by Ryan James
         </h1>
 
+        <div className={styles.container}>
+          <form name="url-input" netlify>
+            <label>URL: <input type="text" name="url" placeholder="https://..."></input></label>
+            <button type="submit">Shorten that URL!</button>
+          </form>
+        </div>
        
       </main>
 
