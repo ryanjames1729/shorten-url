@@ -11,9 +11,10 @@ exports.handler = async function (event) {
         if(destination.indexOf("://") === -1) {
             destination = "https://" + destination;
         }
-        data.push("/" + url.route + "  " + destination + "  302");
+        form.push("/" + url.route + "  " + destination + "  302");
     }
 
+    console.log(form);
     
 
     fs.writeFile(form.referrer + '/_redirects', data.join('\n'), function(err) {
