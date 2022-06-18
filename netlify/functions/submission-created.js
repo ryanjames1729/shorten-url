@@ -12,7 +12,7 @@ exports.handler = async function (event) {
         if(destination.indexOf("://") === -1) {
             destination = "https://" + destination;
         }
-        isDataView.push("/" + url.route + "  " + destination + "  302");
+        data.push("/" + url.route + "  " + destination + "  302");
     }
 
     console.log(data);
