@@ -31,7 +31,8 @@ export default function Home() {
         <h6>by Ryan James</h6>
 
         <div className={styles.container}>
-          <form name="url-input" data-netlify="true" data-netlify-honeypot="bot-field" method="post" onSubmit={handleSubmit}>
+          <form name="url-input" data-netlify="true" data-netlify-honeypot="bot-field" method="post">
+            <input type="hidden" name="form-name" value="url-input" />
             <label>URL: <input type="text" name="url" placeholder="https://..."></input></label>
             <button type="submit">Shorten that URL!</button>
           </form>
