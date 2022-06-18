@@ -3,7 +3,7 @@ var fs = require('fs');
 exports.handler = async function (event) {
     const form = JSON.parse(event.body).payload.data;
     console.log(form)
-    const fs = require('fs');
+    
     const data = [];
 
     for(let item in form) {
