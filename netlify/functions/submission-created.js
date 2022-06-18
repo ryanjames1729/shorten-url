@@ -1,5 +1,4 @@
-const { url } = require('inspector');
-const { isDataView } = require('util/types');
+var fs = require('fs');
 
 exports.handler = async function (event) {
     const form = JSON.parse(event.body).payload.data;
