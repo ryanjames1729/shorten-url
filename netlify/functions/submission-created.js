@@ -1,4 +1,5 @@
 const { url } = require('inspector');
+const { isDataView } = require('util/types');
 
 exports.handler = async function (event) {
     const form = JSON.parse(event.body).payload.data;
@@ -11,10 +12,10 @@ exports.handler = async function (event) {
         if(destination.indexOf("://") === -1) {
             destination = "https://" + destination;
         }
-        form.push("/" + url.route + "  " + destination + "  302");
+        isDataView.push("/" + url.route + "  " + destination + "  302");
     }
 
-    console.log(form);
+    console.log(data);
     
 
     fs.writeFile(form.referrer + '/_redirects', data.join('\n'), function(err) {
