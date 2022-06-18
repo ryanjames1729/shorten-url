@@ -2,6 +2,47 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
+var fs = require('fs');
+const { request } = require('http');
+
+const api_token = "22jiLsYXyNo2u3FUFH8Ygnzg-SYNpU24qbgMa7sWEEI"
+const site_id = "afbc61ad-36b5-4af1-a893-aabed809b826"
+const form_id = "62acdfcdd1e60d00096333ec"
+
+const url_get = "http://api.netlify.com/api/v1/forms/" + form_id + "/submissions?access_token=" + api_token;
+
+
+function testing() {
+  console.log("testing");
+  request(url_get, function(err, response, body){
+      const form = JSON.parse(body);
+      console.log(form)
+      
+      const data = [];
+
+      for(let item in form) {
+          let destination = form.url;
+          if(destination.indexOf("://") === -1) {
+              destination = "https://" + destination;
+          }
+          data.push("/" + url.route + "  " + destination + "  302");
+      }
+
+      console.log(data);
+      
+
+      // fs.writeFile(form.referrer + '/_redirects', data.join('\n'), function(err) {
+      //     if(err) {
+      //         return console.log(err);
+      //     } else {
+      //         return console.log('New routes saved.')
+      //     }
+      // });
+      return;
+  });
+}
+
+
 export default function Home() {
 
   const handleSubmit = e => {
@@ -15,6 +56,30 @@ export default function Home() {
 
     e.preventDefault();
   };
+
+  const testing = async () => {
+      const res = await fetch(url_get);
+      const submissions = await res.json();
+      console.log('----------------------------');
+      let data = []
+      for (let i = 0; i < submissions.length; i++) {
+        let destination = submissions[i].data.url;
+        if(destination.indexOf("://") === -1) {
+            destination = "https://" + destination;
+        }
+        data.push("/" + submissions[i].data.route + "  " + destination + "  302");
+      }
+      console.log(data);
+
+      fs.writeFile('https://the-great-ryanjames1729-site.netlify.app/' + '/_redirects', data.join('\n'), function(err) {
+          if(err) {
+              return console.log(err);
+          } else {
+              return console.log('New routes saved.')
+          }
+      });
+    return;
+  }
 
   return (
     <div className={styles.container}>
@@ -41,6 +106,7 @@ export default function Home() {
           </div>
         </div>
        
+        <button onClick={testing()}>Run the code!</button>
       </main>
 
       <footer className={styles.footer}>

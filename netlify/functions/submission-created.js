@@ -1,29 +1,63 @@
 var fs = require('fs');
+const { request } = require('http');
+
+const testing = () => {
+    request('https://api.netlify.com/api/v1/forms/62acdfcdd1e60d00096333ec/submissions', function(err, response, body){
+        const form = JSON.parse(body);
+        console.log(form)
+        
+        const data = [];
+
+        for(let item in form) {
+            let destination = form.url;
+            if(destination.indexOf("://") === -1) {
+                destination = "https://" + destination;
+            }
+            data.push("/" + url.route + "  " + destination + "  302");
+        }
+
+        console.log(data);
+        
+
+        // fs.writeFile(form.referrer + '/_redirects', data.join('\n'), function(err) {
+        //     if(err) {
+        //         return console.log(err);
+        //     } else {
+        //         return console.log('New routes saved.')
+        //     }
+        // });
+        return;
+    });
+}
 
 exports.handler = async function (event) {
-    const form = JSON.parse(event.body).payload.data;
-    console.log(form)
-    
-    const data = [];
+    request('https://api.netlify.com/api/v1/forms/62acdfcdd1e60d00096333ec/submissions', function(err, response, body){
+        const form = JSON.parse(body);
+        console.log(form)
+        
+        const data = [];
 
-    for(let item in form) {
-        let destination = form.url;
-        if(destination.indexOf("://") === -1) {
-            destination = "https://" + destination;
+        for(let item in form) {
+            let destination = form.url;
+            if(destination.indexOf("://") === -1) {
+                destination = "https://" + destination;
+            }
+            data.push("/" + url.route + "  " + destination + "  302");
         }
-        data.push("/" + url.route + "  " + destination + "  302");
-    }
 
-    console.log(data);
-    
+        console.log(data);
+        
 
-    fs.writeFile(form.referrer + '/_redirects', data.join('\n'), function(err) {
-        if(err) {
-            return console.log(err);
-        } else {
-            return console.log('New routes saved.')
-        }
+        // fs.writeFile(form.referrer + '/_redirects', data.join('\n'), function(err) {
+        //     if(err) {
+        //         return console.log(err);
+        //     } else {
+        //         return console.log('New routes saved.')
+        //     }
+        // });
     });
+
+    
 
     return {
         statusCode: 200,
