@@ -28,14 +28,17 @@ export default function Home() {
         <h1 className={styles.title}>
           Welcome to URL Shortener
         </h1>
-        <h6>by Ryan James</h6>
+        <h6>by Ryan James</h6>  
 
-        <div className={styles.container}>
+        <div className={styles.card}>
+          <div className={styles.grid}>
           <form name="url-input" data-netlify="true" data-netlify-honeypot="bot-field" method="post">
             <input type="hidden" name="form-name" value="url-input" />
-            <label>URL: <input type="text" name="url" placeholder="https://..."></input></label>
+            <label htmlFor="url">URL: </label><input type="text" name="url" placeholder="https://..."></input><br/>
+            <label htmlFor="route">Route: </label><input type="text" name="route" placeholder="catsOnTrampolines..."></input>
             <button type="submit">Shorten that URL!</button>
           </form>
+          </div>
         </div>
        
       </main>
