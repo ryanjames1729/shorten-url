@@ -8,7 +8,7 @@ export default function Home() {
     fetch("/", {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "url-input", ...this.state })
+      body: encode({ 'form-name': 'url-input', 'destination': 'url' })
     })
       .then(() => alert("Success!"))
       .catch(error => alert(error));
@@ -26,8 +26,9 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to URL shortener by Ryan James
+          Welcome to URL Shortener
         </h1>
+        <h6>by Ryan James</h6>
 
         <div className={styles.container}>
           <form name="url-input" data-netlify="true" data-netlify-honeypot="bot-field" method="post" onSubmit={handleSubmit}>
